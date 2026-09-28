@@ -1,0 +1,9 @@
+# Terraform working directory and local state
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Local SSH key material
+*.pem
+*.key
+terra-ec2-key
