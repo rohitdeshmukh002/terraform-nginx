@@ -46,15 +46,14 @@ resource "aws_instance" "automate-ec2" {
   key_name        = aws_key_pair.my-key.key_name
   security_groups = [aws_security_group.default.name]
 
-  instance_type = "t3.micro"
-  ami           = "ami-01a00762f46d584a1"
-
+  instance_type = var.aws_instance_type
+  ami           = var.ec2_ami_id
   root_block_device {
-    volume_size = 8
+    volume_size = var.aws_root_storage_size
     volume_type = "gp3"
   }
 
   tags = {
-    Name = "automate-ec2"
+    Name = "automate-vm"
   }
 }
