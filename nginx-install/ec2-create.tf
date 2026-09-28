@@ -45,6 +45,7 @@ resource "aws_security_group" "default" {
 resource "aws_instance" "my-ec2" {
   key_name        = aws_key_pair.my_key.key_name
   security_groups = [aws_security_group.default.name]
+  count           = 2
 
   instance_type = var.aws_instance_type
   ami           = var.aws_ami_type
