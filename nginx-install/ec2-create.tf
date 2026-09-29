@@ -43,17 +43,21 @@ resource "aws_security_group" "default" {
 
 
 resource "aws_instance" "my-ec2" {
+  for_each = tomap({
+    terraec2 = "t3.micro"
+    terraec3 = "t3.micro"
+  })
   key_name        = aws_key_pair.my_key.key_name
   security_groups = [aws_security_group.default.name]
-  count           = 2
+#   count           = 2
 
-  instance_type = var.aws_instance_type
+  instance_type = each.value
   ami           = var.aws_ami_type
 
   user_data = file("nginx-install.sh")
 
   tags = {
-    Name = "nginx-automate"
+    Name = each.key
   }
 }
 
