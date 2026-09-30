@@ -44,8 +44,8 @@ resource "aws_security_group" "default" {
 
 resource "aws_instance" "my-ec2" {
   for_each = tomap({
+    terraec1 = "t3.micro"
     terraec2 = "t3.micro"
-    terraec3 = "t3.micro"
   })
   key_name        = aws_key_pair.my_key.key_name
   security_groups = [aws_security_group.default.name]
@@ -55,6 +55,11 @@ resource "aws_instance" "my-ec2" {
   ami           = var.aws_ami_type
 
   user_data = file("nginx-install.sh")
+
+  root_block_device {
+    volume_size = var.env == "prod" ? 15 : var.ec2_default_valume
+    volume_type = "gp3"
+  }
 
   tags = {
     Name = each.key
