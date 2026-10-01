@@ -10,10 +10,10 @@ variable "aws_ami_type" {
 
 variable "env" {
   default = "prod"
-  type = string
+  type    = string
 }
 
 variable "ec2_default_valume" {
   default = 8
-  type = number
+  type    = number
 }
