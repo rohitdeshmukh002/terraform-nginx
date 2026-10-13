@@ -8,3 +8,5 @@
 *.key
 terra-ec2-key
 terra-key
+terra-key-module
+terra-key-module.*
